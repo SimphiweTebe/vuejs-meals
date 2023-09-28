@@ -1,25 +1,7 @@
 <template>
-  <div class="bg-gray-100 h-full">
-    <header class="bg-white shadow-md h-16 flex justify-between items-stretch">
-      <router-link :to="{name: 'home'}" class="inline-flex items-center px-5">
-        Home
-      </router-link>
-      <div class="navLinks px-5">
-        <router-link to="/">
-          Search Meals
-        </router-link>
-        <router-link to="/">
-          Meals by Letter
-        </router-link>
-        <router-link to="/">
-          Meals by Ingredient
-        </router-link>
-      </div>
-    </header>
-    <main class="main">
-      <router-view />
-    </main>
-  </div>
+  <main class="bg-gray-100 h-full">
+    <router-view />
+  </main>
 </template>
 
 <script setup>
