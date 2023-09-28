@@ -1,9 +1,16 @@
 <script setup>
-  import { computed } from 'vue';
+  import { computed, onMounted, ref } from 'vue';
   import store from '../store';
+  import axiosClient from '../axiosClient'
 
-  const meals = computed(()=> store.state.meals)
   const letters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  const ingredients = ref([])
+
+  onMounted(async ()=> {
+    const { data } = await axiosClient.get('list.php?i=list')
+    ingredients.value = data
+  })
+  
 </script>
 
 <template>
