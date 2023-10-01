@@ -1,9 +1,10 @@
 <template>
-  <header class="bg-white shadow-md h-16 flex justify-between items-stretch">
-    <router-link :to="{name: 'home'}" class="inline-flex items-center px-5">
+  <nav class="nav">
+    <header class="navBar">
+    <router-link :to="{name: 'home'}" class="home">
       Home
     </router-link>
-    <div class="navLinks px-5">
+    <div class="navBar__menu">
       <router-link :to="{name: 'byName'}">
         Search Meals
       </router-link>
@@ -15,4 +16,5 @@
       </router-link>
     </div>
   </header>
+  </nav>
 </template>
