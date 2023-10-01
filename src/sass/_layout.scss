@@ -1,0 +1,36 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+.nav {
+  background-color: $white;
+  box-shadow: 1px 3px 3px rgba(0,0,0,.05);
+  margin-bottom: 40px;
+}
+
+.navBar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+
+  a {
+    color: lighten($black, 10);
+    transition: color .3s ease-in-out;
+
+    &:hover {
+      color: lighten($black, 40);
+    }
+  }
+  
+  @include centerMax;
+
+  &__menu {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+.container {
+  @include centerMax;
+}
