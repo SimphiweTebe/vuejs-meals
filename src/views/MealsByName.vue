@@ -1,10 +1,20 @@
 <script setup>
-  import { computed, ref } from 'vue';
+  import { computed, onMounted, ref } from 'vue';
   import store from '../store';
+  import { useRoute } from 'vue-router';
 
+  const route = useRoute()
   const keyword = ref('')
   const meals = computed(()=> store.state.searchedMeals)
   const searchMeals = ()=> store.dispatch('searchMeals', keyword.value)
+
+  onMounted(()=> {
+    keyword.value = route.params.name
+
+    if(keyword.value){
+      searchMeals()
+    }
+  })
 
 </script>
 
@@ -21,11 +31,12 @@
 
   <div class="grid">
     <div class="card" v-for="meal of meals" :key="meal.idMeal">
-      <img class="card__image" :src="meal.strMealThumb" :alt="meal.strMeal">
-      <h3 class="card__title">{{ meal.strMeal }}</h3>
-      <div class="card__actions">
-        <a :href="meal.strYoutube" target="_blank">Youtube</a>
-        <router-link to="/">View</router-link>
+      <router-link to="/" class="card__image">
+        <img :src="meal.strMealThumb" :alt="meal.strMeal">
+      </router-link>
+      <div class="card__details">
+        <h3 class="title">{{ meal.strMeal }}</h3>
+        <a class="action" :href="meal.strYoutube" target="_blank">Youtube</a>
       </div>
     </div>
   </div>
@@ -54,8 +65,13 @@
     box-shadow: 1px 2px 4px rgba(0,0,0,.01);
 
     &__image {
-      height: 200px;
-      object-fit: cover;
+      width: 100%;
+
+      img {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+      }
     }
 
     &__title {
@@ -64,9 +80,8 @@
       padding: 0 10px;
     }
 
-    &__actions {
-      display: flex;
-      padding: 0 10px 20px;
+    &__details {
+      padding: 0 10px 30px;
     }
   }
 </style>
