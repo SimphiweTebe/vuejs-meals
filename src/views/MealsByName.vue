@@ -31,7 +31,7 @@
 
   <div class="grid">
     <div class="card" v-for="meal of meals" :key="meal.idMeal">
-      <router-link to="/" class="card__image">
+      <router-link :to="{name: 'mealDetails', params: { id: meal.idMeal}}" class="card__image">
         <img :src="meal.strMealThumb" :alt="meal.strMeal">
       </router-link>
       <div class="card__details">
