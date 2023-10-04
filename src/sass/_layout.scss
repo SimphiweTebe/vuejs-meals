@@ -2,7 +2,7 @@
 @use './mixins' as *;
 
 .nav {
-  background-color: $white;
+  background-color: $blue;
   box-shadow: 1px 3px 3px rgba(0,0,0,.05);
   margin-bottom: 40px;
 }
@@ -15,11 +15,12 @@
   height: 80px;
 
   a {
-    color: lighten($black, 10);
+    color: $white;;
     transition: color .3s ease-in-out;
+    font-weight: 300;
 
     &:hover {
-      color: lighten($black, 40);
+      color: lighten($blue, 20);
     }
   }
   
