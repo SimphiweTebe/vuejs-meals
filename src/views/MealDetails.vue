@@ -2,11 +2,13 @@
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import axiosClient from '../axiosClient';
+import Button from '../components/Button.vue';
 
   const route = useRoute()
   const meal = ref({})
 
   onMounted(async ()=> {
+    window.scrollTo(0,0)
     const {data} = await axiosClient.get(`lookup.php?i=${route.params.id}`)
     meal.value = data.meals[0] || {}
   })
@@ -21,9 +23,13 @@
     </div>
 
     <div class="details__cards">
-      <p><span>area: </span><strong>{{ meal.strArea }}</strong></p>
+      <p><span>type: </span><strong>{{ meal.strArea }}</strong></p>
       <p><span>category: </span><strong>{{ meal.strCategory }}</strong></p>
     </div>
+
+    <p class="text">
+      {{ meal.strInstructions }}
+    </p>
 
     <div class="details__table">
 
@@ -51,6 +57,11 @@
 
     </div>
 
+    <div class="links">
+      <Button :href="meal.strSource" title="Original source" target="_blank"/>
+      <Button :href="meal.strSource" title="YouTube" target="_blank" class="red"/>
+    </div>
+
     <p class="tags">tags: {{ meal.strTags }}</p>
   </div>
 </template>
@@ -66,6 +77,13 @@
     overflow: hidden;
     padding-bottom: 40px;
     text-align: center;
+    background-color: $white;
+
+    .text {
+      width: 90%;
+      margin: 40px auto;
+      line-height: 1.8;
+    }
 
     &__header {
       position: relative;
@@ -112,7 +130,7 @@
       margin: 40px auto;
       display: flex;
       width: 90%;
-      border: 1px solid $grey-1;
+      border: 1px solid $grey-2;
       border-bottom: none;
       border-radius: $borderRadius;
       .column {
@@ -120,21 +138,27 @@
         text-align: left;
 
         &:nth-of-type(1) {
-          border-right: 1px solid $grey-1;
+          border-right: 1px solid $grey-2;
         }
 
         h3 {
           font-weight: 500;
           font-size: 1.6rem;
           padding: 10px;
-          border-bottom: 1px solid $grey-1;
+          border-bottom: 1px solid $grey-2;
         }
 
         li {
           padding: 5px 10px;
-          border-bottom: 1px solid $grey-1;
+          border-bottom: 1px solid $grey-2;
         }
       }
+    }
+
+    .links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
     }
 
     .tags {

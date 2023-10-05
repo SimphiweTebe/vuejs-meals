@@ -1,5 +1,58 @@
+<script setup>
+  import { computed } from "@vue/reactivity";
+  import { onMounted, watch } from 'vue';
+  import store from '../store';
+  import { useRoute } from 'vue-router';
+import MealCollection from "../components/MealCollection.vue";
+
+  const letters = "ABCDEFGHIJKLMNOPRSTUVWY".split('')
+  const meals = computed(()=> store.state.mealsByLetter)
+  const route = useRoute()
+
+  watch(route, ()=> {
+    store.dispatch('searchMealByLetter', route.params.letter)
+  })
+
+  onMounted(()=> {
+    store.dispatch('searchMealByLetter', route.params.letter)
+  })
+</script>
+
 <template>
-  <h1>By letters</h1>
+  <h1>By letter</h1>
+
+  <div class="letters">
+    <router-link 
+      :to="{ name: 'byLetter', params: { letter } }" 
+      v-for="letter of letters" 
+      :key="letter"
+      class="letters__link"
+    >
+      {{ letter }}
+    </router-link>
+  </div>
+
+  <MealCollection :meals="meals"/>
 </template>
 
-<script setup></script>
+<style scoped lang="scss">
+  @use '../sass/variables' as *;
+
+  h1 {
+    font-weight: 500;
+  }
+
+  .letters {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 40px;
+    width: 100%;
+
+    &__link {
+      padding: 10px;
+      border: 2px solid $grey-2;
+    }
+  }
+</style>
