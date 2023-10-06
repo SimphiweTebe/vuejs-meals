@@ -3,7 +3,7 @@
   import { onMounted, watch } from 'vue';
   import store from '../store';
   import { useRoute } from 'vue-router';
-import MealCollection from "../components/MealCollection.vue";
+  import MealCollection from "../components/MealCollection.vue";
 
   const letters = "ABCDEFGHIJKLMNOPRSTUVWY".split('')
   const meals = computed(()=> store.state.mealsByLetter)
@@ -19,7 +19,7 @@ import MealCollection from "../components/MealCollection.vue";
 </script>
 
 <template>
-  <h1>By letter</h1>
+  <h1 class="title-1">By letter</h1>
 
   <div class="letters">
     <router-link 
@@ -37,10 +37,6 @@ import MealCollection from "../components/MealCollection.vue";
 
 <style scoped lang="scss">
   @use '../sass/variables' as *;
-
-  h1 {
-    font-weight: 500;
-  }
 
   .letters {
     position: relative;
