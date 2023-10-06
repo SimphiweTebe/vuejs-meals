@@ -5,3 +5,12 @@ input {
   border: 1px solid $grey-2;
   border-radius: $borderRadius;
 }
+
+.search {
+  position: relative;
+  margin-bottom: 40px;
+  
+  input {
+    width: 100%;
+  }
+}

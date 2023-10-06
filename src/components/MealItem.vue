@@ -35,7 +35,7 @@ const { meal } = defineProps({
     border-radius: $borderRadius;
     overflow: hidden;
     background-color: $white;
-    box-shadow: 1px 2px 4px rgba(0,0,0,.01);
+    box-shadow: $boxShadow;
 
     &__image {
       width: 100%;

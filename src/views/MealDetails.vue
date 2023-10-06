@@ -72,7 +72,7 @@ import Button from '../components/Button.vue';
     position: relative;
     max-width: 800px;
     margin: 0 auto 40px;
-    box-shadow: 0px 2px 3px 2px rgba(0,0,0, .04);
+    box-shadow: $boxShadow;
     border-radius: $borderRadius;
     overflow: hidden;
     padding-bottom: 40px;
