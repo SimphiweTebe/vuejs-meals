@@ -33,6 +33,7 @@
   </div>
 
   <MealCollection :meals="meals"/>
+  
 </template>
 
 <style scoped lang="scss">

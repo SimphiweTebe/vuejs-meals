@@ -2,21 +2,25 @@
   import { computed, onMounted, ref } from 'vue';
   import store from '../store';
   import axiosClient from '../axiosClient'
+  import MealCollection from '../components/MealCollection.vue';
 
-  const letters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
-  const ingredients = ref([])
+  const meals = ref([])
 
-  onMounted(async ()=> {
-    const { data } = await axiosClient.get('list.php?i=list')
-    ingredients.value = data
-  })
+  const fetchMeals = async ()=> {
+    const mealsArray = []
+
+    for (let i = 0; i < 4; i++){
+      const { data } = await axiosClient.get('random.php')
+      mealsArray.push(data.meals[0])
+    }
+
+    meals.value = mealsArray
+  }
+
+  onMounted(()=> fetchMeals())
   
 </script>
 
 <template>
-  <div class="letters">
-      <router-link :to="{ name: 'byLetter', params: {letter}}" v-for="letter of letters" :key="letter">
-        {{ letter }}
-      </router-link>
-  </div>
+  <MealCollection :meals="meals"/>
 </template>

@@ -1,8 +1,13 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import axiosClient from '../axiosClient';
 
 const ingredients = ref([])
+const keyword = ref('')
+const computedIngredients = computed(()=> {
+  if (!computedIngredients) ingredients
+  return ingredients.value.filter((item)=> item.strIngredient.toLowerCase().includes(keyword.value.toLowerCase()))
+})
 
 onMounted(async ()=> {
   const { data } = await axiosClient.get('list.php?i=list')
@@ -13,10 +18,19 @@ onMounted(async ()=> {
 <template>
   <h1 class="title-1">By Ingredient</h1>
 
+  <div class="search">
+    <input 
+      type="text" 
+      class="rounded border-2 border-gray-200 w-full" 
+      placeholder="Search for ingredients"
+      v-model="keyword"
+    />
+  </div>
+
   <router-link 
     :to="{ name: 'ingredientDetails', params: { ingredient: ingredient.strIngredient}}" 
     class="ingredient" 
-    v-for="ingredient of ingredients" 
+    v-for="ingredient of computedIngredients" 
     :key="ingredient.idIngredient"
   >
     <h4 class="ingredient__title">{{ ingredient.strIngredient }}</h4>
